@@ -23,14 +23,14 @@ const MusicList: React.FC<MusicListProps> = ({ musicList }) => {
   };
 
   return (
-    <Box sx={{ mt: 2, maxWidth: 600, margin: '0 auto', px: 2, bgcolor: '#424242', borderRadius: '8px' }}> {/* 背景色を灰色に、角を丸める */}
+    <Box sx={{ mt: 2, maxWidth: 800, margin: '0 auto', px: 2, bgcolor: '#424242', borderRadius: '8px' }}> {/* 背景色を灰色に、角を丸める */}
       <List disablePadding>
         {musicList.map((music, index) => (
           <ListItem key={`${music.id}-${index}`} disableGutters sx={{ py: 1.5, display: 'flex', alignItems: 'center', borderBottom: index < musicList.length - 1 ? '1px solid rgba(255, 255, 255, 0.12)' : 'none' }}>
-            {/* 左側のID (version) */}
-            <Box sx={{ flexShrink: 0, mr: 2, width: 30, textAlign: 'center', color: '#bdbdbd', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-              <Typography variant="h6" component="span" fontWeight="bold" sx={{ lineHeight: 1 }}>
-                {music.version}
+            {/* 左側の作品名 (seriesName) */}
+            <Box sx={{ flexShrink: 0, mr: 2, width: 80, textAlign: 'center', color: '#bdbdbd', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+              <Typography variant="body2" component="span" fontWeight="bold" sx={{ lineHeight: 1 }}>
+                {music.seriesName} {/* 作品名を表示 */}
               </Typography>
             </Box>
 
@@ -38,7 +38,7 @@ const MusicList: React.FC<MusicListProps> = ({ musicList }) => {
             <ListItemText
               primary={
                 <React.Fragment>
-                  <Typography variant="subtitle1" component="div" align="center" fontWeight="bold" sx={{ color: '#ffffff', mb: 0.5 }}>
+                  <Typography variant="h6" component="div" align="center" fontWeight="bold" sx={{ color: '#ffffff', mb: 0.5 }}>
                     {music.genre} {/* ジャンル名を目立たせる (太字) */}
                   </Typography>
                   <Typography variant="body1" component="div" align="center" sx={{ color: '#bdbdbd' }}>

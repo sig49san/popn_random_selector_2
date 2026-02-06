@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { MusicData } from '../types/MusicData';
-import allMusicData from '../data/music_data.json'; // 生成したJSONデータを直接インポート
+import allMusicData from '../data/music_data.json';
+import { getSeriesName } from '../data/seriesMap'; // getSeriesName をインポート
 
 /**
  * 配列をランダムに指定数取得する関数
@@ -29,9 +30,13 @@ export const useMusicData = (): UseMusicDataResult => {
   const [musicData, setMusicData] = useState<MusicData[]>([]);
 
   useEffect(() => {
-    // JSONデータは直接インポートしているので、ここでは読み込みエラーチェックのみ
     if (allMusicData && allMusicData.length > 0) {
-      setMusicData(allMusicData as MusicData[]);
+      // seriesName を追加してデータを整形
+      const processedData: MusicData[] = (allMusicData as MusicData[]).map(music => ({
+        ...music,
+        seriesName: getSeriesName(music.version)
+      }));
+      setMusicData(processedData);
       setLoading(false);
     } else {
       setError('楽曲データの読み込みに失敗しました。');

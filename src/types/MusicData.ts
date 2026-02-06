@@ -1,6 +1,7 @@
 export interface MusicData {
   id: number;
   version: number;
+  seriesName: string; // ここを追加
   genre: string;
   musicName: string;
   artist: string;
