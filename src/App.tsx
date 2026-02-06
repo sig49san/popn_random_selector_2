@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { useMusicData } from './hooks/useMusicData';
+import MusicSelector from './components/MusicSelector';
+import MusicList from './components/MusicList';
+import { Container, Typography, Box } from '@mui/material'; // Material UIのコンポーネントを追加
+import './App.css'; // デフォルトのCSSを維持する
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { selectedMusic, drawMusic, loading, error } = useMusicData();
+  const [selectedCount, setSelectedCount] = useState<number>(20); // デフォルト20曲
+
+  const handleSelectMusic = (count: number) => {
+    drawMusic(count);
+  };
+
+  if (loading) {
+    return <Typography>Loading music data...</Typography>;
+  }
+
+  if (error) {
+    return <Typography color="error">Error: {error}</Typography>;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container maxWidth="md">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h3" component="h1" gutterBottom align="center">
+          Pop'n Music 楽曲おみくじ
+        </Typography>
+        <MusicSelector
+          onSelect={handleSelectMusic}
+          selectedCount={selectedCount}
+          setSelectedCount={setSelectedCount}
+        />
+        <MusicList musicList={selectedMusic} />
+      </Box>
+    </Container>
+  );
 }
 
-export default App
+export default App;
