@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMusicData } from './hooks/useMusicData';
 import MusicSelector from './components/MusicSelector';
 import MusicList from './components/MusicList';

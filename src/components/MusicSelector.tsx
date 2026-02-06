@@ -8,7 +8,7 @@ interface MusicSelectorProps {
 }
 
 const MusicSelector: React.FC<MusicSelectorProps> = ({ onSelect, selectedCount, setSelectedCount }) => {
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_event: Event, newValue: number | number[]) => {
     setSelectedCount(newValue as number);
   };
 

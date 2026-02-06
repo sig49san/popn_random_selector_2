@@ -9,10 +9,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
     globals: true, // `describe`, `it` などをグローバルに利用可能にする
-    plugins: [ // Vitestのテスト用プラグインにJSXランタイムを明示
-      react({
-        jsxRuntime: 'classic', // classic に指定
-      }),
-    ],
   },
 })
